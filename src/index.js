@@ -85,9 +85,11 @@ const DASHBOARD_HTML = `<!DOCTYPE html>
       const lat=Date.now()-t1
       set('latency','✅',lat+'ms',lat<500?'pass':'wait')
       log('SDK تحمّل في '+lat+'ms','lg')
-      const sdk=window.SallaEmbeddedSDK
-      if(!sdk){ set('sdk','❌','غير موجود في window','fail'); setStatus('❌ SDK غير موجود','error'); return }
-      set('sdk','✅','v'+(sdk.version||'?'),'pass')
+      // الـ SDK يُصدّر singleton على .embedded وليس على الـ root object مباشرة
+      const sdkRoot = window.SallaEmbeddedSDK
+      const sdk = sdkRoot?.embedded || window.salla?.embedded
+      if(!sdk){ set('sdk','❌','SallaEmbeddedSDK.embedded غير موجود','fail'); setStatus('❌ SDK غير موجود','error'); return }
+      set('sdk','✅','v'+(sdkRoot?.version||'?'),'pass')
       log('SDK جاهز — استدعاء init()...','lg')
       setStatus('⏳ جاري handshake مع سلة...','wait')
       try {
