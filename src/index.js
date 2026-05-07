@@ -41,6 +41,11 @@ const DASHBOARD_HTML = `<!DOCTYPE html>
   </style>
 </head>
 <body>
+  <!-- هذا السطر يظهر فوراً حتى لو JS معطّل — يؤكد أن الصفحة تحمّل -->
+  <div style="background:#15803d;color:#fff;padding:10px;border-radius:8px;margin-bottom:14px;font-size:1rem;text-align:center;font-weight:bold;">
+    ✅ Railway وصل — الصفحة تحمّل
+  </div>
+
   <h1>🧪 Zidly — TEST C</h1>
   <p class="sub">اختبار Embedded SDK من Railway Backend</p>
   <div id="sdk-status" class="status wait">⏳ جاري تهيئة SDK...</div>
